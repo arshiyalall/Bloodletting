@@ -18,27 +18,29 @@ public class PlayerAttackMelee : MonoBehaviour{
 
       void Update(){
            if (Time.time >= nextAttackTime){
-                  //if (Input.GetKeyDown(KeyCode.Space))
-                 if (Input.GetAxis("Attack") > 0){
+                  if (Input.GetKeyDown(KeyCode.Space)){
+                  // if (Input.GetAxis("Attack") > 0){
                         Attack();
                         nextAttackTime = Time.time + 1f / attackRate;
+                  // }
                   }
             }
       }
 
       void Attack(){
+            Debug.Log("We hit attack now\n");
             //animator.SetTrigger ("Melee");
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPt.position, attackRange, enemyLayers);
            
             foreach(Collider2D enemy in hitEnemies){
                   Debug.Log("We hit " + enemy.name);
-                  enemy.GetComponent<EnemyMeleeDamage>().TakeDamage(attackDamage);
+                  // enemy.GetComponent<EnemyMeleeDamage>().TakeDamage(attackDamage);
             }
       }
 
       //NOTE: to help see the attack sphere in editor:
       void OnDrawGizmosSelected(){
-           if (attackPt == null) {return;}
+            if (attackPt == null) {return;}
             Gizmos.DrawWireSphere(attackPt.position, attackRange);
       }
 }
